@@ -23,8 +23,8 @@ public class GameController {
     }
 
     @PostMapping("/score")
-    public void saveScore(@RequestParam Long userId, @RequestParam int score) {
-        gameService.saveScore(userId, score);
+    public void saveScore(@RequestParam Long userId, @RequestParam int score, @RequestParam String mode) {
+        gameService.saveScore(userId, score, mode);
     }
 
     @GetMapping("/scores")

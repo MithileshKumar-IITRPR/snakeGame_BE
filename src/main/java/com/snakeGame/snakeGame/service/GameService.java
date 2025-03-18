@@ -8,7 +8,7 @@ import java.util.List;
 public interface GameService {
     User loginUser(String name);
 
-    void saveScore(Long userId, int score);
+    void saveScore(Long userId, int score, String mode);
 
     List<Score> getTopScores();
 }

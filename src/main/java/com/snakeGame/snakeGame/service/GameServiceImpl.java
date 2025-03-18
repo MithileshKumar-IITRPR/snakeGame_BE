@@ -23,12 +23,13 @@ public class GameServiceImpl implements GameService{
         });
     }
 
-    public void saveScore(Long userId, int score) {
+    public void saveScore(Long userId, int score, String mode) {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new RuntimeException("User not found"));
         Score newScore = new Score();
         newScore.setUser(user);
         newScore.setScore(score);
+        newScore.setMode(mode);
         scoreRepository.save(newScore);
     }
 

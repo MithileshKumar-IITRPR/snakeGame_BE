@@ -14,4 +14,6 @@ public class Score {
     private User user;
 
     private int score;
+
+    private String mode;
 }
