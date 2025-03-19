@@ -1,5 +1,6 @@
 package com.snakeGame.snakeGame.controller;
 
+import com.snakeGame.snakeGame.dto.ModeWiseTopScore;
 import com.snakeGame.snakeGame.model.Score;
 import com.snakeGame.snakeGame.model.User;
 import com.snakeGame.snakeGame.service.GameService;
@@ -30,5 +31,10 @@ public class GameController {
     @GetMapping("/scores")
     public List<Score> getTopScores() {
         return gameService.getTopScores();
+    }
+
+    @GetMapping("/modeWiseTopScore")
+    public ModeWiseTopScore getUserModeWiseTopScore(@RequestParam Long userId) {
+        return gameService.getUserModeWiseTopScore(userId);
     }
 }

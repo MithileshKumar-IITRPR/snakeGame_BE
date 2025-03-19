@@ -1,5 +1,6 @@
 package com.snakeGame.snakeGame.service;
 
+import com.snakeGame.snakeGame.dto.ModeWiseTopScore;
 import com.snakeGame.snakeGame.model.Score;
 import com.snakeGame.snakeGame.model.User;
 
@@ -11,4 +12,6 @@ public interface GameService {
     void saveScore(Long userId, int score, String mode);
 
     List<Score> getTopScores();
+
+    ModeWiseTopScore getUserModeWiseTopScore(Long userId);
 }
