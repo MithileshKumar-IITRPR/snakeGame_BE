@@ -1,5 +1,9 @@
 package com.snakeGame.snakeGame.config;
 
+import io.swagger.v3.oas.models.Components;
+import io.swagger.v3.oas.models.OpenAPI;
+import io.swagger.v3.oas.models.security.SecurityRequirement;
+import io.swagger.v3.oas.models.security.SecurityScheme;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -17,6 +21,29 @@ import java.util.Arrays;
 public class SecurityConfig {
     @Autowired
     private JWTAuthorizationFilter jwtAuthorizationFilter;
+
+    @Bean
+    public OpenAPI customOpenAPI() {
+        SecurityScheme bearerAuth = new SecurityScheme()
+                .type(SecurityScheme.Type.HTTP)
+                .scheme("bearer")
+                .bearerFormat("JWT")
+                .description("JWT Authorization header using the Bearer scheme.");
+
+        Components components = new Components()
+                .addSecuritySchemes("bearerAuth", bearerAuth);
+
+        SecurityRequirement securityRequirement = new SecurityRequirement()
+                .addList("bearerAuth");
+
+        return new OpenAPI()
+                .components(components)
+                .addSecurityItem(securityRequirement)
+                .info(new io.swagger.v3.oas.models.info.Info()
+                        .title("Snake Game API")
+                        .version("v0.0.1")
+                        .description("API for Snake Game"));
+    }
 
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
@@ -38,6 +65,7 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers("/api/login").permitAll()
+                        .requestMatchers("/swagger-ui/**", "/v3/api-docs/**", "/webjars/**").permitAll()
                         .anyRequest().authenticated()
                 )
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
