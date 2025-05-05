@@ -66,3 +66,4 @@ Swagger is configured using Springdoc OpenAPI. The dependency is included in the
 ## Additional Information
 - **Security:** JWT is used for stateless authentication.
 - **Database:** Uses an H2 in-memory database for demo; for production, replace with a persistent DB.
+- **UI Repo:** [https://github.com/MithileshKumar-IITRPR/snakeGame]
